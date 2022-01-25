@@ -19,10 +19,10 @@
   "dependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "loader-utils": "^1.4.0",
-    "pdfjs-dist": "^2.12.313",
+    "pdfjs-dist": "2.12.313",
     "raw-loader": "^4.0.2",
     "vue-resize-sensor": "^2.0.0",
-    "worker-loader": "^3.0.8"
+    "worker-loader": "3.0.8"
   },
   "peerDependencies": {}
 }
