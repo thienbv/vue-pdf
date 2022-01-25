@@ -1,23 +1,19 @@
 <style src="./annotationLayer.css"></style>
 <script>
+import componentFactory from './componentFactory'
+import pdfjsWrapper from './pdfjsWrapper'
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.js'
 
-	import componentFactory from './componentFactory'
-	import pdfjsWrapper from './pdfjsWrapper'
+var PDFJS = require('pdfjs-dist/legacy/build/pdf.js')
 
-	var PDFJS = require('pdfjs-dist/legacy/build/pdf.js');
+if (process.env.VUE_ENV !== 'server') {
+  if (typeof window !== 'undefined' && 'Worker' in window) {
+    PDFJS.GlobalWorkerOptions.workerPort = new pdfjsWorker()
+  }
+}
 
-	if ( process.env.VUE_ENV !== 'server' ) {
+var component = componentFactory(pdfjsWrapper(PDFJS))
+component.PDFJS = PDFJS
 
-		if ( typeof window !== 'undefined' && 'Worker' in window ) {
-
-			var PdfjsWorker = require('worker-loader!pdfjs-dist/legacy/build/pdf.worker.js');
-			PDFJS.GlobalWorkerOptions.workerPort = new PdfjsWorker();
-		}
-	}
-
-	var component = componentFactory(pdfjsWrapper(PDFJS));
-	component.PDFJS = PDFJS;
-
-	export default component;
-
+export default component
 </script>
